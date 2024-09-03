@@ -1,0 +1,1 @@
+import{j as t}from"./mui-c9524ebd.js";const r=({onClick:s})=>t.jsxs("button",{className:"btn btn--base gap-2 h-9 px-5 text-label",onClick:s,children:[t.jsx("i",{className:"icon-filters-regular"})," Filters"]});export{r as F};
