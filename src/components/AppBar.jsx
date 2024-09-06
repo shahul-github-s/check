@@ -55,7 +55,7 @@ const AppBar = ({ title }) => {
     <>
       <Helmet>
         {/* <title>{title} AIMS Sales DashBoard</title> */}
-        <title>AIMS Sales Dashboard</title>
+        <title>AIMS Sales Report</title>
       </Helmet>
       <AppBarWrapper>
         <div

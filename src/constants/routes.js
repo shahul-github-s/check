@@ -1,25 +1,25 @@
 const ROUTES = {
   main: [
     {
-      name: "Dashboard",
+      name: "Sales Analytics",
       icon: "objects-column",
       notifications: 2,
       links: [
         {
           path: "/",
-          name: "Dashboard A",
+          name: "Performance Overview",
         },
-        {
-          path: "/dashboard-b",
-          name: "Dashboard B",
-        },
+        // {
+        //   path: "/dashboard-b",
+        //   name: "Dashboard B",
+        // },
         {
           path: "/dashboard-c",
-          name: "Dashboard C",
+          name: "Lead Status",
         },
         {
           path: "/dashboard-d",
-          name: "Dashboard D",
+          name: "Service Unit Report",
         },
       ],
     },
