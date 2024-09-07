@@ -145,7 +145,7 @@ const AppBar = ({ title }) => {
             </NavLink>
             <div className="flex flex-col">
               <span className="text-[15px] font-semibold text-header">
-                Helena Brauer
+                Ahamed Anees
               </span>
               <span className="text-xs">Admin</span>
             </div>
