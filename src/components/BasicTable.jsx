@@ -1,6 +1,6 @@
-import styled from 'styled-components/macro';
-import theme from 'styled-theming';
-import {Table} from 'antd';
+import styled from "styled-components/macro";
+import theme from "styled-theming";
+import { Table } from "antd";
 
 const BasicTable = styled(Table)`
   flex-grow: 1;
@@ -16,12 +16,12 @@ const BasicTable = styled(Table)`
   }
 
   .ant-checkbox-wrapper {
-    &:hover .ant-checkbox-inner, &:focus .ant-checkbox-inner {
-      border-color: ${theme('theme', {
-        light: 'var(--text-dark) !important',
-        dark: 'var(--peach) !important'
+    &:hover .ant-checkbox-inner,
+    &:focus .ant-checkbox-inner {
+      border-color: ${theme("theme", {
+        light: "var(--text-dark) !important",
+        dark: "var(--peach) !important",
       })};
-      background: transparent !important;
     }
   }
 
@@ -33,21 +33,21 @@ const BasicTable = styled(Table)`
     width: 15px;
     height: 15px;
     border-radius: 4px;
-    background: ${theme('theme', {
-      light: 'var(--header-dark)',
-      dark: 'transparent'
+    background: ${theme("theme", {
+      light: "var(--header-dark)",
+      dark: "transparent",
     })};
-    border-color: ${theme('theme', {
-      light: 'var(--text-dark)',
-      dark: 'var(--label-light)'
+    border-color: ${theme("theme", {
+      light: "var(--text-dark)",
+      dark: "var(--label-light)",
     })};
 
-    &:hover, &:focus {
-      border-color: ${theme('theme', {
-        light: 'var(--text-dark) !important',
-        dark: 'var(--peach) !important'
+    &:hover,
+    &:focus {
+      border-color: ${theme("theme", {
+        light: "var(--text-dark) !important",
+        dark: "var(--peach) !important",
       })};
-      background: transparent;
     }
 
     &::after {
@@ -63,22 +63,21 @@ const BasicTable = styled(Table)`
   }
 
   .ant-table {
-    background: ${theme('theme', {
-      light: '#fff',
-      dark: 'var(--text-light)'
+    background: ${theme("theme", {
+      light: "#fff",
+      dark: "var(--text-light)",
     })};
     border-radius: 16px;
-    border: 1px solid ${theme('theme', {
-      light: 'var(--border)',
-      dark: 'transparent'
-    })};
+    border: 1px solid
+      ${theme("theme", {
+        light: "var(--border)",
+      })};
     display: flex;
     flex-direction: column;
   }
 
   .ant-table-thead .ant-table-cell {
     padding: 18px 20px 16px;
-    background: transparent !important;
     border-color: var(--border);
     color: var(--label);
     text-transform: uppercase;
@@ -103,12 +102,10 @@ const BasicTable = styled(Table)`
       padding: 16px 20px;
       font-weight: 500;
       font-size: 15px;
-      background: transparent !important;
       transition: none !important;
 
       &-row-hover,
       &.ant-table-selection-column {
-        background: transparent !important;
       }
     }
 
@@ -118,16 +115,14 @@ const BasicTable = styled(Table)`
   }
 
   .ant-table-placeholder {
-    background: transparent !important;
   }
 
   .ant-table-footer {
     padding: 13px 24px 24px;
-    background: transparent;
     border-top: 1px solid var(--border);
-    color: ${theme('theme', {
-      light: 'var(--label)',
-      dark: 'var(--header)'
+    color: ${theme("theme", {
+      light: "var(--label)",
+      dark: "var(--header)",
     })};
     font-size: 14px;
     font-weight: 600;
@@ -137,22 +132,22 @@ const BasicTable = styled(Table)`
   .ant-table-column-sorters {
     justify-content: flex-start;
     gap: 8px;
-    
+
     .ant-table-column-title {
       flex: unset;
     }
-    
+
     .ant-table-column-sorter.ant-table-column-sorter-full {
       color: var(--label-light);
 
       .anticon {
-        &.active, &:hover {
+        &.active,
+        &:hover {
           color: var(--header);
         }
       }
     }
   }
-}
 `;
 
-export default BasicTable
+export default BasicTable;

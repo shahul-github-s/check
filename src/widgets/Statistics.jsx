@@ -11,13 +11,11 @@ const DashAnalytics = () => {
 
   const fetchGoogleSheetData = async () => {
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwwv-ppJv0GZiUhff6xOZqUmU3rtmiLLgjhFuObx2w2VkPrrKYFbTXYVAIwRNpNvu-Qdg/exec"
-      );
+      const response = await fetch("");
       const data = await response.json();
       setGoogleSheetData(data);
     } catch (error) {
-      console.error("Error fetching Google Sheets data:", error);
+      // console.error("Error fetching Google Sheets data:", error);
     }
   };
 

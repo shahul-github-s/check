@@ -1,0 +1,1 @@
+import{b as n,_ as e,a as u}from"./toConsumableArray-96abd844.js";function i(s){var o=n();return function(){var t,r=e(s);if(o){var a=e(this).constructor;t=Reflect.construct(r,arguments,a)}else t=r.apply(this,arguments);return u(this,t)}}export{i as _};

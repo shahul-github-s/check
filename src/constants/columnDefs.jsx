@@ -157,51 +157,51 @@ export const REVIEW_COLUMN_DEFS = [
   },
 ];
 
-export const ORDERS_COLUMN_DEFS = [
-  {
-    title: "Order ID",
-    dataIndex: "id",
-    render: (text) => <span>#{text}</span>,
-  },
-  {
-    title: "Customer",
-    render: (text, record) => (
-      <span>
-        {record.user.firstName} {record.user.lastName}
-      </span>
-    ),
-    sorter: (a, b) => a.user.lastName.localeCompare(b.user.lastName),
-    responsive: ["lg"],
-  },
-  {
-    title: "Amount",
-    dataIndex: "amount",
-    render: (text) => <span>${text}</span>,
-    sorter: (a, b) => a.amount - b.amount,
-  },
-  {
-    title: "Payment method",
-    dataIndex: "method",
-    render: (text) => <span>{text}</span>,
-    responsive: ["xl"],
-  },
-  {
-    title: "Order date",
-    dataIndex: "date",
-    render: (text) => <span>{dayjs(text).format("MMM DD, YYYY")}</span>,
-    sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    render: (text) => <StatusBadge status={text} />,
-  },
-  {
-    title: "",
-    width: 36,
-    render: () => <IconButton className="dark:bg-widget" />,
-  },
-];
+// export const ORDERS_COLUMN_DEFS = [
+//   {
+//     title: "Order ID",
+//     dataIndex: "id",
+//     render: (text) => <span>#{text}</span>,
+//   },
+//   {
+//     title: "Customer",
+//     render: (text, record) => (
+//       <span>
+//         {record.user.firstName} {record.user.lastName}
+//       </span>
+//     ),
+//     sorter: (a, b) => a.user.lastName.localeCompare(b.user.lastName),
+//     responsive: ["lg"],
+//   },
+//   {
+//     title: "Amount",
+//     dataIndex: "amount",
+//     render: (text) => <span>${text}</span>,
+//     sorter: (a, b) => a.amount - b.amount,
+//   },
+//   {
+//     title: "Payment method",
+//     dataIndex: "method",
+//     render: (text) => <span>{text}</span>,
+//     responsive: ["xl"],
+//   },
+//   {
+//     title: "Order date",
+//     dataIndex: "date",
+//     render: (text) => <span>{dayjs(text).format("MMM DD, YYYY")}</span>,
+//     sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
+//   },
+//   {
+//     title: "Status",
+//     dataIndex: "status",
+//     render: (text) => <StatusBadge status={text} />,
+//   },
+//   {
+//     title: "",
+//     width: 36,
+//     render: () => <IconButton className="dark:bg-widget" />,
+//   },
+// ];
 
 export const ORDER_STATUS_COLUMN_DEFS = [
   {
@@ -267,5 +267,234 @@ export const ORDERS_WIDGET_COLUMN_DEFS = [
     title: "Status",
     dataIndex: "status",
     render: (text) => <StatusBadge status={text} />,
+  },
+];
+// @constants/columnDefs.js
+// constants/columnDefs.js
+
+// constants/columnDefs.js
+
+export const ORDERS_COLUMN_DEFS = [
+  {
+    title: "Service Unit Report",
+    dataIndex: "serviceUnitReport",
+    key: "serviceUnitReport",
+    fixed: "left", // Fix the first column
+    width: 250, // Adjust width as necessary
+  },
+  {
+    title: "Ration Card",
+    dataIndex: "rationCard",
+    key: "rationCard",
+  },
+  {
+    title: "Voter Id",
+    dataIndex: "voterId",
+    key: "voterId",
+  },
+  {
+    title: "Aadhar Card",
+    dataIndex: "aadharCard",
+    key: "aadharCard",
+  },
+  {
+    title: "Pan Card",
+    dataIndex: "panCard",
+    key: "panCard",
+  },
+  {
+    title: "College Application",
+    dataIndex: "collegeApplication",
+    key: "collegeApplication",
+  },
+  {
+    title: "License and RTO Services",
+    dataIndex: "licenseAndRtoServices",
+    key: "licenseAndRtoServices",
+  },
+  {
+    title: "Money Transfer Services",
+    dataIndex: "moneyTransferServices",
+    key: "moneyTransferServices",
+  },
+  {
+    title: "Counselling Apply",
+    dataIndex: "counsellingApply",
+    key: "counsellingApply",
+  },
+  {
+    title: "TN Police",
+    dataIndex: "tnPolice",
+    key: "tnPolice",
+  },
+  {
+    title: "TNEB",
+    dataIndex: "tneb",
+    key: "tneb",
+  },
+  {
+    title: "Online Payments",
+    dataIndex: "onlinePayments",
+    key: "onlinePayments",
+  },
+  {
+    title: "Dharisanam Bookings",
+    dataIndex: "dharisanamBookings",
+    key: "dharisanamBookings",
+  },
+  {
+    title: "Typing Services",
+    dataIndex: "typingServices",
+    key: "typingServices",
+  },
+  {
+    title: "MSME",
+    dataIndex: "msme",
+    key: "msme",
+  },
+  {
+    title: "UDAY Scheme",
+    dataIndex: "udayScheme",
+    key: "udayScheme",
+  },
+  {
+    title: "Income Certificate",
+    dataIndex: "incomeCertificate",
+    key: "incomeCertificate",
+  },
+  {
+    title: "Community Certificate",
+    dataIndex: "communityCertificate",
+    key: "communityCertificate",
+  },
+  {
+    title: "Nativity Certificate",
+    dataIndex: "nativityCertificate",
+    key: "nativityCertificate",
+  },
+  {
+    title: "Intercaste Marriage Certificate",
+    dataIndex: "intercasteMarriageCertificate",
+    key: "intercasteMarriageCertificate",
+  },
+  {
+    title: "Obc Certificate",
+    dataIndex: "obcCertificate",
+    key: "obcCertificate",
+  },
+  {
+    title: "No Male Child Certificate",
+    dataIndex: "noMaleChildCertificate",
+    key: "noMaleChildCertificate",
+  },
+  {
+    title: "First Graduate Certificate",
+    dataIndex: "firstGraduateCertificate",
+    key: "firstGraduateCertificate",
+  },
+  {
+    title: "Small/Marginal Farmer Certificate",
+    dataIndex: "smallMarginalFarmerCertificate",
+    key: "smallMarginalFarmerCertificate",
+  },
+  {
+    title: "Widow Certificate",
+    dataIndex: "widowCertificate",
+    key: "widowCertificate",
+  },
+  {
+    title: "Deserted Women Certificate",
+    dataIndex: "desertedWomenCertificate",
+    key: "desertedWomenCertificate",
+  },
+  {
+    title: "Disability Pension Scheme",
+    dataIndex: "disabilityPensionScheme",
+    key: "disabilityPensionScheme",
+  },
+  {
+    title: "Widow Pension Scheme",
+    dataIndex: "widowPensionScheme",
+    key: "widowPensionScheme",
+  },
+  {
+    title: "Deserted Women Pension Scheme",
+    dataIndex: "desertedWomenPensionScheme",
+    key: "desertedWomenPensionScheme",
+  },
+  {
+    title: "Unmarried Women Pension Scheme",
+    dataIndex: "unmarriedWomenPensionScheme",
+    key: "unmarriedWomenPensionScheme",
+  },
+  {
+    title: "Old Age Pension Scheme",
+    dataIndex: "oldAgePensionScheme",
+    key: "oldAgePensionScheme",
+  },
+  {
+    title: "TN Employment Registration",
+    dataIndex: "tnEmploymentRegistration",
+    key: "tnEmploymentRegistration",
+  },
+  {
+    title: "Government Job Application",
+    dataIndex: "governmentJobApplication",
+    key: "governmentJobApplication",
+  },
+  {
+    title: "Passport",
+    dataIndex: "passport",
+    key: "passport",
+  },
+  {
+    title: "Flight Ticket",
+    dataIndex: "flightTicket",
+    key: "flightTicket",
+  },
+  {
+    title: "Visa",
+    dataIndex: "visa",
+    key: "visa",
+  },
+  {
+    title: "Certificate Attestation",
+    dataIndex: "certificateAttestation",
+    key: "certificateAttestation",
+  },
+  {
+    title: "Bus Booking",
+    dataIndex: "busBooking",
+    key: "busBooking",
+  },
+  {
+    title: "Visa Stamping",
+    dataIndex: "visaStamping",
+    key: "visaStamping",
+  },
+  {
+    title: "Cruise Booking",
+    dataIndex: "cruiseBooking",
+    key: "cruiseBooking",
+  },
+  {
+    title: "Hotel Booking",
+    dataIndex: "hotelBooking",
+    key: "hotelBooking",
+  },
+  {
+    title: "Medical Appointment",
+    dataIndex: "medicalAppointment",
+    key: "medicalAppointment",
+  },
+  {
+    title: "Tour Services",
+    dataIndex: "tourServices",
+    key: "tourServices",
+  },
+  {
+    title: "Total",
+    dataIndex: "total",
+    key: "total",
   },
 ];

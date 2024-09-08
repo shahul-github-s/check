@@ -1,171 +1,24 @@
-import {faker} from '@faker-js/faker';
+// @db/orders_table.js
 
+import { faker } from "@faker-js/faker";
+
+// Dummy data for demonstration. Replace this with actual data from Google Sheets.
 const orders_table = [
-    {
-        id: 'YU34692',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Paypal',
-        date: faker.date.past(),
-        status: 'new',
-    },
-    {
-        id: 'YU34655',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Credit Card',
-        date: faker.date.past(),
-        status: 'cancelled',
-    },
-    {
-        id: 'YU34175',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Paypal',
-        date: faker.date.past(),
-        status: 'processing',
-    },
-    {
-        id: 'YU18175',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Amazon Pay',
-        date: faker.date.recent(),
-        status: 'completed',
-    },
-    {
-        id: 'YU03175',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Payoneer',
-        date: faker.date.recent(),
-        status: 'processing',
-    },
-    {
-        id: 'YU80163',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Google Pay',
-        date: faker.date.recent(),
-        status: 'new',
-    },
-    {
-        id: 'YU81563',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Apple Pay',
-        date: faker.date.recent(),
-        status: 'processing',
-    },
-    {
-        id: 'YU11562',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Apple Pay',
-        date: faker.date.recent(),
-        status: 'processing',
-    },
-    {
-        id: 'YU60063',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Credit Card',
-        date: faker.date.recent(),
-        status: 'new',
-    },
-    {
-        id: 'YU60064',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Paypal',
-        date: faker.date.past(),
-        status: 'cancelled',
-    },
-    {
-        id: 'YU32963',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Google Pay',
-        date: faker.date.recent(),
-        status: 'new',
-    },
-    {
-        id: 'YU94463',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Google Pay',
-        date: faker.date.recent(),
-        status: 'completed',
-    },
-    {
-        id: 'YB95363',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Amazon Pay',
-        date: faker.date.recent(),
-        status: 'completed',
-    },
-    {
-        id: 'BBG5363',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Credit Card',
-        date: faker.date.past(),
-        status: 'completed',
-    },
-    {
-        id: 'BBG4001',
-        user: {
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-        },
-        amount: faker.commerce.price(),
-        method: 'Credit Card',
-        date: faker.date.past(),
-        status: 'completed',
-    }
-]
+  {
+    serviceUnitReport: "Service A",
+    total: faker.commerce.price(),
+    profit: faker.commerce.price(),
+    rajeswari: faker.commerce.price(),
+    susmitha: faker.commerce.price(),
+    vasuthiyagarajan: faker.commerce.price(),
+    kaviya: faker.commerce.price(),
+    refai: faker.commerce.price(),
+    shaffi: faker.commerce.price(),
+    mathiazhagan: faker.commerce.price(),
+    sheerin: faker.commerce.price(),
+    gayathri: faker.commerce.price(),
+  },
+  // Add more rows as needed.
+];
 
-export default orders_table
+export default orders_table;

@@ -1,7 +1,7 @@
 // components
 import { Helmet } from "react-helmet";
 import Headroom from "react-headroom";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import Fade from "@mui/material/Fade";
 import Collapse from "@mui/material/Collapse";
@@ -140,9 +140,10 @@ const AppBar = ({ title }) => {
           </div>
           <span className="hidden h-[55px] border-l mr-[35px] ml-[30px] md:block" />
           <div className="hidden items-center gap-2.5 md:flex">
-            <NavLink to="/settings">
+            {/* <NavLink to="/settings">
               <img className="w-10 h-10 rounded-full" src={user} alt="user" />
-            </NavLink>
+            </NavLink> */}
+            <img className="w-10 h-10 rounded-full" src={user} alt="user" />
             <div className="flex flex-col">
               <span className="text-[15px] font-semibold text-header">
                 Ahamed Anees
@@ -150,13 +151,13 @@ const AppBar = ({ title }) => {
               <span className="text-xs">Admin</span>
             </div>
           </div>
-          <button
+          {/* <button
             className="btn-icon md:ml-10 4xl:hidden"
             aria-label="Open menu"
             onClick={() => setOpen(true)}
           >
             <i className="icon-bars-regular" />
-          </button>
+          </button> */}
         </div>
       </AppBarWrapper>
       <h1 className="px-4 md:px-6 mb-4 md:mb-6 xl:hidden">{title}</h1>

@@ -1,136 +1,156 @@
-// components
-import Spring from "@components/Spring";
-import FilterItem from "@ui/FilterItem";
-import FiltersButton from "@ui/FiltersButton";
-import Search from "@ui/Search";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import BasicTable from "@components/BasicTable";
 import Pagination from "@ui/Pagination";
-import OrderCollapse from "@components/OrderCollapse";
-
-// hooks
-import { useState, useEffect } from "react";
-import usePagination from "@hooks/usePagination";
+import Search from "@ui/Search";
 import { useWindowSize } from "react-use";
-
-// constants
-import { ORDER_STATUSES } from "@constants/options";
-import { ORDERS_COLUMN_DEFS } from "@constants/columnDefs";
-
-// data placeholder
-import orders_table from "@db/orders_table";
 
 const OrdersTable = () => {
   const { width } = useWindowSize();
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({
+    currentPage: 0,
+    itemsPerPage: 10,
+  });
   const [query, setQuery] = useState("");
-  const [activeCollapse, setActiveCollapse] = useState("");
-
-  const getQty = (status) => {
-    if (status === "all") return orders_table.length;
-    return orders_table.filter((item) => item.status === status).length;
-  };
-
-  const filteredOrders = () => {
-    const data =
-      activeFilter === "all"
-        ? orders_table
-        : orders_table.filter((item) => item.status === activeFilter);
-    return data.filter((item) =>
-      item.id.toLowerCase().includes(query.toLowerCase())
-    );
-  };
-
-  const pagination = usePagination(filteredOrders(), 10);
 
   useEffect(() => {
-    pagination.setCurrentPage(0);
-  }, [activeFilter, query]);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setActiveCollapse("");
-    });
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        setActiveCollapse("");
-      });
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    axios
+      .get(
+        "https://script.google.com/macros/s/AKfycbx300sNNOBDLagVaE0fdF3cl9Aq92AjZZNf1_Tt6N0U9oP_LvaG2Pn4JzKPFEtz5EnCUg/exec"
+      )
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  useEffect(() => {
-    setActiveCollapse("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination.currentPage]);
+  const { currentPage, itemsPerPage } = pagination;
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // Filter data based on the search query
+  const filteredData = data.filter((item) =>
+    item["Service Unit Report "].toLowerCase().includes(query.toLowerCase())
+  );
+
+  const paginatedData = filteredData.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 0 && page < totalPages) {
+      setPagination({ ...pagination, currentPage: page });
+    }
+  };
+
+  // Define fixed values for the first column
+  const fixedValues = [
+    "Ration Card",
+    "Voter Id",
+    "Aadhar Card",
+    "Pan Card",
+    "College Application",
+    "License and RTO Services",
+    "Money Transfer Services",
+    "Counselling Apply",
+    "TN Police",
+    "TNEB",
+    "Online Payments",
+    "Dharisanam Bookings",
+    "Typing Services",
+    "MSME",
+    "UDAY Scheme",
+    "Income Certificate",
+    "Community Certificate",
+    "Nativity Certificate",
+    "Intercaste Marriage Certificate",
+    "Obc Certificate",
+    "No Male Child Certificate",
+    "First Graduate Certificate",
+    "Small/Marginal Farmer Certificate",
+    "Widow Certificate",
+    "Deserted Women Certificate",
+    "Disability Pension Scheme",
+    "Widow Pension Scheme",
+    "Deserted Women Pension Scheme",
+    "Unmarried Women Pension Scheme",
+    "Old Age Pension Scheme",
+    "TN Employment Registration",
+    "Government Job Application",
+    "Passport",
+    "Flight Ticket",
+    "Visa",
+    "Certificate Attestation",
+    "Bus Booking",
+    "Visa Stamping",
+    "Cruise Booking",
+    "Hotel Booking",
+    "Medical Appointment",
+    "Tour Services",
+    "Total",
+  ];
+
+  // Update columns definition
+  const columns = [
+    {
+      title: "Service Unit Report",
+      dataIndex: "Service Unit Report ",
+      key: "Service Unit Report ",
+      fixed: "left", // Fix the first column to the left
+      render: (text) => (fixedValues.includes(text) ? text : ""), // Render fixed values only
+    },
+    ...Object.keys(data[0] || {})
+      .filter((key) => key !== "Service Unit Report ")
+      .map((key) => ({
+        title: key.trim(),
+        dataIndex: key.trim(),
+        key: key.trim(),
+      })),
+  ];
 
   return (
-    <Spring className="card flex flex-col flex-1">
-      <div className="flex flex-col gap-5 p-5 !pb-4 border-b xs:p-6">
+    <div className="orders-table">
+      <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
         <div className="flex flex-col gap-4 md:flex-row">
           <Search
             wrapperClass="flex-1"
             value={query}
             onChange={setQuery}
-            placeholder="Search for Order..."
+            placeholder="Search for Service..."
           />
           <button className="btn btn--base h-[50px] px-5 gap-2">
             <i className="icon-arrow-down-to-line-regular text-[16px]" />
             Export
           </button>
-          <button className="btn btn--primary">Create Order</button>
         </div>
-        <div className="flex flex-col items-start gap-5 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap gap-x-6 gap-y-4">
-            {ORDER_STATUSES.map((item, index) => (
-              <FilterItem
-                key={index}
-                {...item}
-                qty={getQty(item.value)}
-                active={activeFilter}
-                setActive={setActiveFilter}
-              />
-            ))}
-          </div>
-          <FiltersButton />
-        </div>
-      </div>
-      <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
+
+        <BasicTable
+          columns={columns}
+          dataSource={paginatedData}
+          rowKey="Service Unit Report " // Ensure this key is correct
+          pagination={false}
+          scroll={{ x: "max-content" }} // Allows horizontal scrolling if needed
+        />
+
         {width < 768 ? (
-          <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-4">
-              {pagination.currentItems().map((item, index) => (
-                <OrderCollapse
-                  key={item.id}
-                  index={index}
-                  active={activeCollapse}
-                  setActive={setActiveCollapse}
-                  order={item}
-                />
-              ))}
-            </div>
-            {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+          />
         ) : (
-          <BasicTable
-            columns={ORDERS_COLUMN_DEFS}
-            dataSource={pagination.currentItems()}
-            rowKey="id"
-            rowSelection={{
-              type: "checkbox",
-            }}
-            showSorterTooltip={false}
-            pagination={false}
-            footer={() => (
-              <div className="flex items-center justify-between">
-                <p className="uppercase">{pagination.showingOf()}</p>
-                <Pagination pagination={pagination} btnClass="dark:bg-widget" />
-              </div>
-            )}
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
           />
         )}
       </div>
-    </Spring>
+    </div>
   );
 };
 
