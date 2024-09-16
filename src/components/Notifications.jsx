@@ -1,6 +1,6 @@
 import React from "react";
 import Spring from "@components/Spring"; // Assuming this is a custom animation component
-import BasicCheckbox from "@ui/BasicCheckbox";
+// import BasicCheckbox from "@ui/BasicCheckbox";
 import Gallery from "@components/Gallery";
 
 const Notification = ({ data, index, total }) => {
