@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Spring from "@components/Spring";
 import Select from "@ui/Select";
 import {
@@ -31,25 +31,83 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+// Default data for the chart
+const defaultData = {
+  week: [
+    { name: "Mon", b: 0 },
+    { name: "Tues", b: 0 },
+    { name: "Wednes", b: 0 },
+    { name: "Thurs", b: 0 },
+    { name: "Fri", b: 0 },
+    { name: "Satur", b: 0 },
+    { name: "Sun", b: 0 },
+  ],
+  month: [
+    { name: "01-05", b: 0 },
+    { name: "06-10", b: 0 },
+    { name: "11-15", b: 0 },
+    { name: "16-20", b: 0 },
+    { name: "21-25", b: 0 },
+    { name: "26-31", b: 0 },
+  ],
+  year: [
+    { name: "Jan-Mar", b: 0 },
+    { name: "Apr-Jun", b: 0 },
+    { name: "Jul-Sep", b: 0 },
+    { name: "Oct-Dec", b: 0 },
+  ],
+};
+
+// Fetch data from Google Apps Script
+const fetchSalesData = async () => {
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwEg7PSNzrZmd8AVxl-_pGrijyazyhbDVJ29wEI3IibLcqZg9bySaTuVtUxaghkERtnZw/exec"
+    );
+    const data = await response.json();
+
+    // Update the sales_chart object
+    sales_chart.week.data = data.week;
+    sales_chart.month.data = data.month;
+    sales_chart.year.data = data.year;
+  } catch (error) {
+    console.error("Error fetching sales data:", error);
+  }
+};
 const SalesAnalyticsArea = () => {
   const { width } = useWindowSize();
   const { theme } = useTheme();
   const [period, setPeriod] = useState(PERIODS[0]);
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState([]);
   const points = generateGridPoints("salesAnalytics", 50, "x");
 
   useEffect(() => {
-    // Check if the data is available and set it to state
+    // Fetch data immediately
+    fetchSalesData();
+
+    // Set up polling to fetch data every second
     const interval = setInterval(() => {
-      if (sales_chart[period.value].data.length > 0) {
-        setChartData(sales_chart[period.value].data);
-        clearInterval(interval); // Clear the interval once data is loaded
-      }
-    }, 100); // Poll every 100ms to check for the data
+      fetchSalesData();
+      // Update chart data with the latest data
+      setChartData(sales_chart[period.value].data);
+    }, 100); // 1000ms = 1 second
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
   }, [period]);
 
-  if (!chartData) {
-    return <div>Loading...</div>; // Display loading state
+  useEffect(() => {
+    // Update chart data whenever the period changes
+    setChartData(sales_chart[period.value].data);
+  }, [period]);
+
+  if (!chartData || chartData.length === 0) {
+    const data = defaultData;
+    // Update the sales_chart object
+    sales_chart.week.data = data.week;
+    sales_chart.month.data = data.month;
+    sales_chart.year.data = data.year;
+    // return <div>Sales Analytics Loading...</div>; // Display loading state
   }
 
   return (

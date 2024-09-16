@@ -89,7 +89,7 @@ const OrdersTable = () => {
     "Hotel Booking",
     "Medical Appointment",
     "Tour Services",
-    "Total",
+    "Outline",
   ];
 
   // Update columns definition
@@ -110,6 +110,17 @@ const OrdersTable = () => {
       })),
   ];
 
+  const handleExport = async () => {
+    const exportUrl =
+      "https://script.google.com/macros/s/AKfycbwVmiCzufwMcN5br40vFfDw4vPf3MDlH1H4WP1oncY2oACrSF6HfwYjgO_RfJxhP9BIKw/exec"; // Replace with your Web App URL
+    try {
+      const response = await axios.get(exportUrl);
+      const { url } = response.data;
+      window.open(url, "_blank"); // Open the download link in a new tab
+    } catch (error) {
+      console.error("Error exporting file:", error);
+    }
+  };
   return (
     <div className="orders-table">
       <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
@@ -120,7 +131,10 @@ const OrdersTable = () => {
             onChange={setQuery}
             placeholder="Search for Service..."
           />
-          <button className="btn btn--base h-[50px] px-5 gap-2">
+          <button
+            className="btn btn--base h-[50px] px-5 gap-2"
+            onClick={handleExport}
+          >
             <i className="icon-arrow-down-to-line-regular text-[16px]" />
             Export
           </button>

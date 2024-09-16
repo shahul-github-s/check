@@ -2,7 +2,6 @@ import React from "react";
 import Spring from "@components/Spring"; // Assuming this is a custom animation component
 import BasicCheckbox from "@ui/BasicCheckbox";
 import Gallery from "@components/Gallery";
-import IconButton from "@ui/IconButton";
 
 const Notification = ({ data, index, total }) => {
   return (
@@ -49,10 +48,10 @@ const Notification = ({ data, index, total }) => {
             </div>
           ) : null}
         </div>
-        <BasicCheckbox
+        {/* <BasicCheckbox
           id={data.id}
           labelClass="!border-border !bg-[var(--header-dark)] dark:!bg-widget"
-        />
+        /> */}
       </div>
     </Spring>
   );
@@ -62,64 +61,63 @@ const Notifications = () => {
   const [notifications, setNotifications] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  React.useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbyVu1E78y5755XSEr1Re6Bb0ykPYV7iVFbr8jFbk3W5_u4-uP2YoN82raIeawQjMP58ng/exec"
-        );
-        const data = await response.json();
+  const fetchNotifications = async () => {
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbyVu1E78y5755XSEr1Re6Bb0ykPYV7iVFbr8jFbk3W5_u4-uP2YoN82raIeawQjMP58ng/exec"
+      );
 
-        // Filter out notifications with empty fields
-        const formattedNotifications = data
-          .filter(
-            (notification) =>
-              notification.date &&
-              notification.time &&
-              notification.title &&
-              notification.preview // Ensure all necessary fields are present
-          )
-          .map((notification) => ({
-            ...notification,
-            media: notification.media
-              ? [{ src: notification.media, alt: "company logo" }]
-              : [],
-          }));
-
-        setNotifications(formattedNotifications);
-      } catch (error) {
-        console.error("Error fetching notifications:", error);
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
 
-    fetchNotifications();
+      const data = await response.json();
+
+      // Filter out notifications with empty fields
+      const formattedNotifications = data
+        .filter(
+          (notification) =>
+            notification.date &&
+            notification.time &&
+            notification.title &&
+            notification.preview // Ensure all necessary fields are present
+        )
+        .map((notification) => ({
+          ...notification,
+          media: notification.media
+            ? [{ src: notification.media, alt: "company logo" }]
+            : [],
+        }));
+
+      setNotifications(formattedNotifications);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchNotifications(); // Fetch notifications on component mount
+
+    // Optional: Add an interval to periodically refresh notifications
+    // const intervalId = setInterval(fetchNotifications, 60000); // e.g., every 60 seconds
+
+    // Cleanup interval on component unmount
+    // return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="flex flex-col gap-5 bg-widget w-[288px] h-[475px] rounded-3xl border shadow-lg xs:w-[360px]">
       <div className="flex items-center justify-between p-5 !pb-0 xs:p-6">
-        <h2 className="flex items-center gap-2">
-          Notifications
-          {notifications.filter((notification) => !notification.read).length >
-            0 && (
-            <span className="bg-red w-6 h-6 rounded-full flex items-center justify-center text-white text-sm">
-              <span className="-mt-[1px]">
-                {
-                  notifications.filter((notification) => !notification.read)
-                    .length
-                }
-              </span>
-            </span>
-          )}
-        </h2>
-        <IconButton />
+        <h2 className="flex items-center gap-2">Notifications</h2>
       </div>
       <div className="overflow-y-auto with-scrollbar">
         <div className="flex flex-col flex-1 gap-4 p-5 !pt-0 xs:p-6">
           {loading ? (
             <p>Loading...</p>
+          ) : notifications.length === 0 ? (
+            <p>No notifications available.</p>
           ) : (
             notifications.map((notification, index) => (
               <Notification

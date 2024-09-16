@@ -151,13 +151,13 @@ const AppBar = ({ title }) => {
               <span className="text-xs">Admin</span>
             </div>
           </div>
-          {/* <button
+          <button
             className="btn-icon md:ml-10 4xl:hidden"
             aria-label="Open menu"
             onClick={() => setOpen(true)}
           >
             <i className="icon-bars-regular" />
-          </button> */}
+          </button>
         </div>
       </AppBarWrapper>
       <h1 className="px-4 md:px-6 mb-4 md:mb-6 xl:hidden">{title}</h1>

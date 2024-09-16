@@ -11,21 +11,32 @@ const DashAnalytics = () => {
 
   const fetchGoogleSheetData = async () => {
     try {
-      const response = await fetch("");
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbzInxrNGat-E-JnpAD7GJ-ZJC7xh2pr3fbuW9UQZWci9i8aH8McHKPk7GWPM3jd_1ntWA/exec"
+      );
       const data = await response.json();
       setGoogleSheetData(data);
     } catch (error) {
-      // console.error("Error fetching Google Sheets data:", error);
+      console.error("Error fetching Google Sheets data:", error);
     }
   };
 
   useEffect(() => {
+    // Fetch data immediately
     fetchGoogleSheetData();
+
+    // Set up polling to fetch data every second
+    const interval = setInterval(() => {
+      fetchGoogleSheetData();
+    }, 100); // 1000ms = 1 second
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   const data = [
     {
-      title: "Today Revenue",
+      title: "Today Sales",
       iconClass: "wallet-solid",
       value: googleSheetData.todayRevenue.value,
       valuePrefix: "₹",

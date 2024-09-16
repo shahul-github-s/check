@@ -1,1 +1,0 @@
-const t={week:{data:[]},month:{data:[]},year:{data:[]}},s=async()=>{try{const a=await(await fetch("https://script.google.com/macros/s/AKfycbzLK64lBUyInFxQPDX-_WbdR5lSd_KnAd98l9eFl3nGChy9aZI0Cb9AEnDWH_u-qUNYaQ/exec")).json();t.week.data=a.week,t.month.data=a.month,t.year.data=a.year}catch(e){console.error("Error fetching sales data:",e)}};s();export{t as s};

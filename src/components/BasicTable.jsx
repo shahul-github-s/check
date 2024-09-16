@@ -2,6 +2,9 @@ import styled from "styled-components/macro";
 import theme from "styled-theming";
 import { Table } from "antd";
 
+// Ensure you have these theme variables defined properly somewhere
+const textColorDark = "#000"; // Pure black color for text in dark mode
+
 const BasicTable = styled(Table)`
   flex-grow: 1;
   height: 100%;
@@ -64,13 +67,14 @@ const BasicTable = styled(Table)`
 
   .ant-table {
     background: ${theme("theme", {
-      light: "#fff",
-      dark: "var(--text-light)",
+      light: "#fff", // White background for light mode
+      dark: "#fff", // White background for dark mode
     })};
     border-radius: 16px;
     border: 1px solid
       ${theme("theme", {
         light: "var(--border)",
+        dark: "var(--border-dark)", // Darker border for dark mode
       })};
     display: flex;
     flex-direction: column;
@@ -79,7 +83,10 @@ const BasicTable = styled(Table)`
   .ant-table-thead .ant-table-cell {
     padding: 18px 20px 16px;
     border-color: var(--border);
-    color: var(--label);
+    color: ${theme("theme", {
+      light: "var(--label)",
+      dark: textColorDark, // Pure black text for dark mode
+    })};
     text-transform: uppercase;
     font-weight: 500;
     font-size: 12px;
@@ -97,15 +104,32 @@ const BasicTable = styled(Table)`
 
   .ant-table-tbody {
     .ant-table-cell {
-      border-color: var(--border);
-      color: var(--header);
+      border-color: ${theme("theme", {
+        light: "var(--border)",
+        dark: "var(--border-dark)", // Darker border for dark mode
+      })};
+      color: ${theme("theme", {
+        light: "var(--header)",
+        dark: "#000", // Pure black text for dark mode
+      })};
       padding: 16px 20px;
       font-weight: 500;
       font-size: 15px;
-      transition: none !important;
+      background: ${theme("theme", {
+        light: "#fff", // White background by default
+        dark: "#fff", // White background in dark mode as well
+      })};
+      transition: background-color 0.3s, color 0.3s;
 
-      &-row-hover,
-      &.ant-table-selection-column {
+      &:hover {
+        background: ${theme("theme", {
+          light: "var(--background-light-hover)",
+          dark: "#000", // Black background on hover in dark mode
+        })};
+        color: ${theme("theme", {
+          light: "var(--header)",
+          dark: "#fff", // White text color on hover in dark mode
+        })};
       }
     }
 
@@ -114,15 +138,12 @@ const BasicTable = styled(Table)`
     }
   }
 
-  .ant-table-placeholder {
-  }
-
   .ant-table-footer {
     padding: 13px 24px 24px;
     border-top: 1px solid var(--border);
     color: ${theme("theme", {
       light: "var(--label)",
-      dark: "var(--header)",
+      dark: textColorDark, // Pure black text for dark mode
     })};
     font-size: 14px;
     font-weight: 600;

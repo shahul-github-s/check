@@ -1,8 +1,10 @@
 // components
 import Spring from "@components/Spring";
 import { Helmet } from "react-helmet";
-import { ReactComponent as LogoIconDark } from "@assets/logo-alt-dark.svg";
-import { ReactComponent as LogoIconLight } from "@assets/logo-alt-light.svg";
+
+// Import PNG images
+// import LogoLight from "@assets/logo-alt-light.png";
+// import LogoDark from "@assets/AIMS-name.png";
 
 // utils
 import PropTypes from "prop-types";
@@ -11,7 +13,7 @@ const AuthLayout = ({ title, children }) => {
   return (
     <>
       <Helmet>
-        <title>{title} AuthLayout</title>
+        <title>AIMS Sales Report</title>
       </Helmet>
       <div className="flex flex-col flex-1 justify-center items-center">
         <Spring
@@ -19,10 +21,19 @@ const AuthLayout = ({ title, children }) => {
           type="slideUp"
         >
           <div className="flex flex-col items-center text-center mb-6">
-            <LogoIconLight className="w-[70px] h-[70px] dark:hidden" />
-            <LogoIconDark className="w-[70px] h-[70px] hidden dark:block" />
-            <h1 className="mt-4 mb-2">{title}</h1>
-            <p className="max-w-[220px] text-label">AuthLayout</p>
+            {/* Use img tags to display the PNG logos */}
+            {/* <img
+              src={LogoLight}
+              alt="Logo Light"
+              className="w-[70px] h-[70px] dark:hidden"
+            /> */}
+            {/* <img
+              src={LogoDark}
+              alt="Logo Dark"
+              className="w-[100px] h-[100px] hidden dark:block"
+            /> */}
+            <h1 className="mt-4 mb-2">AIMS</h1>
+            <p className="max-w-[220px] text-label">Sales Analytics</p>
           </div>
           {children}
         </Spring>

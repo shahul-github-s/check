@@ -1,7 +1,7 @@
 // components
 import TopSellingProductItem from "@components/TopSellingProductItem";
 import StarRating from "@ui/StarRating";
-import IconButton from "@ui/IconButton";
+// import IconButton from "@ui/IconButton";
 import StatusBadge from "@ui/StatusBadge";
 
 // utils
@@ -10,57 +10,34 @@ import dayjs from "dayjs";
 
 export const TOP_SELLING_COLUMN_DEFS = [
   {
-    title: "Accounts Name",
-    dataIndex: "product",
-    render: (text, record) => (
-      <TopSellingProductItem product={record} imgSize={40} />
-    ),
+    title: "Transaction Bank",
+    dataIndex: "name",
     width: 280,
   },
   {
     title: "Revenue",
-    dataIndex: "price",
+    dataIndex: "revenue",
     render: (text) => <span>₹{text}</span>,
-    sorter: (a, b) => a.price - b.price,
+    sorter: (a, b) => a.revenue - b.revenue,
   },
   {
-    title: "Extra",
-    dataIndex: "status",
-    render: (text) => (
-      <span>
-        ₹ <StatusBadge status={text} type="product" />
-      </span>
-    ),
-    responsive: ["xxl"],
-  },
-  {
-    title: "Proft",
-    dataIndex: "sold",
+    title: "Profit",
+    dataIndex: "profit",
     render: (text) => <span>₹{text}</span>,
-    sorter: (a, b) => a.sold - b.sold,
-    responsive: ["lg"],
+    sorter: (a, b) => a.profit - b.profit,
   },
-  // {
-  //   title: "Expenses",
-  //   dataIndex: "earned",
-  //   render: (text, record) => (
-  //     <span>₹{commaFormatter(record.price * record.sold, 2)}</span>
-  //   ),
-  //   sorter: (a, b) => a.price * a.sold - b.price * b.sold,
-  // },
   {
     title: "Expenses",
-    dataIndex: "earned",
-    render: (text, record) => {
-      const total = record.price * record.sold;
-      const formattedTotal = total.toLocaleString("en-IN", {
+    dataIndex: "expenses",
+    render: (text) => {
+      const formattedTotal = text.toLocaleString("en-IN", {
         style: "currency",
         currency: "INR",
         minimumFractionDigits: 2,
       });
       return <span>{formattedTotal}</span>;
     },
-    sorter: (a, b) => a.price * a.sold - b.price * b.sold,
+    sorter: (a, b) => a.expenses - b.expenses,
   },
 ];
 

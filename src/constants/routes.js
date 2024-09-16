@@ -1,9 +1,10 @@
+import Logout from "@components/Logout"; // Adjust the import path accordingly
 const ROUTES = {
   main: [
     {
       name: "Sales Analytics",
       icon: "objects-column",
-      notifications: 2,
+      // notifications: 2,
       links: [
         {
           path: "/",
@@ -95,9 +96,10 @@ const ROUTES = {
     //   icon: "gear",
     // },
     {
-      path: "/sign-in",
+      path: "/logout",
       name: "Logout",
       icon: "arrow-right-from-bracket",
+      component: Logout, // Use the Logout component for this route
     },
   ],
 };
