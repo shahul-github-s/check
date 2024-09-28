@@ -12,7 +12,7 @@ const DashAnalytics = () => {
   const fetchGoogleSheetData = async () => {
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbzInxrNGat-E-JnpAD7GJ-ZJC7xh2pr3fbuW9UQZWci9i8aH8McHKPk7GWPM3jd_1ntWA/exec"
+        "https://script.google.com/macros/s/AKfycbxQPBVrnJuGPBQzhMJBwIhfLgpf6wd3ZECPaOBx8kvNI6CpQv9MnocSfCYJhHDL0966/exec"
       );
       const data = await response.json();
       setGoogleSheetData(data);

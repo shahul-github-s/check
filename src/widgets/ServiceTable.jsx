@@ -17,7 +17,7 @@ const ServiceTable = () => {
   useEffect(() => {
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbwA_ogqmdudCsJm-D4e87v7m9U8gHwnq2L1No7L2knbgE088oWl-1gFhycqf51nqxFNog/exec"
+        "https://script.google.com/macros/s/AKfycbzSf-QXgQ9wvu9U_s5782Kp9o1zNhLEalGOq3-_ZTg__ND62bnf0q0QyTdLcg89HCRjhw/exec"
       )
       .then((response) => {
         setData(response.data);
@@ -112,7 +112,7 @@ const ServiceTable = () => {
 
   const handleExport = async () => {
     const exportUrl =
-      "https://script.google.com/macros/s/AKfycbwVmiCzufwMcN5br40vFfDw4vPf3MDlH1H4WP1oncY2oACrSF6HfwYjgO_RfJxhP9BIKw/exec"; // Replace with your Web App URL
+      "https://script.google.com/macros/s/AKfycbxxXOD5B6DNDRQ1uaABOAqc_et_286dw__ZOxXpIfpquN2wbyhaARGmn5BpfYbEDUkx2g/exec"; // Replace with your Web App URL
     try {
       const response = await axios.get(exportUrl);
       const { url } = response.data;

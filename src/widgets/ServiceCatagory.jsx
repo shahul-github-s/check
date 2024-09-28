@@ -17,7 +17,7 @@ const ServiceTable = () => {
   useEffect(() => {
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbxAw10szQikp6eNEAdEJ2ht5oJ-u0tQZFAZPHbkCsfFo_IRo7aPfqqnPAwj1_h500b_YQ/exec"
+        "https://script.google.com/macros/s/AKfycbyCqYrayWIQpR8acBUgFfEcmNdwYgspIuj6SNZHX9DrXsP5ZsI08b7Gj_d8Pe38nIQApA/exec"
       )
       .then((response) => {
         setData(response.data);
@@ -29,10 +29,13 @@ const ServiceTable = () => {
   const totalItems = data.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Filter data based on the search query
-  const filteredData = data.filter((item) =>
-    item["Service Category Report"].toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredData = data.filter((item) => {
+    const serviceCategory = item["Service Category Report"];
+    return (
+      serviceCategory &&
+      serviceCategory.toLowerCase().includes(query.toLowerCase())
+    );
+  });
 
   const paginatedData = filteredData.slice(
     currentPage * itemsPerPage,
@@ -45,7 +48,6 @@ const ServiceTable = () => {
     }
   };
 
-  // Define fixed values for the first column
   const fixedValues = [
     "Ration Card",
     "Voter Id",
@@ -93,18 +95,15 @@ const ServiceTable = () => {
     "General Services",
     "E-Sevai",
     "Job Application Support",
-    "Travel Agnecy",
-    "Pan Card",
-    "Money Transfer Services",
+    "Travel Services",
   ];
 
-  // Update columns definition
   const columns = [
     {
       title: "Service Category Report",
       dataIndex: "Service Category Report",
       key: "Service Category Report",
-      fixed: "left", // Fix the first column to the left
+      fixed: "left",
       render: (text) => (fixedValues.includes(text) ? text : ""), // Render fixed values only
     },
     ...Object.keys(data[0] || {})
@@ -115,17 +114,19 @@ const ServiceTable = () => {
         key: key.trim(),
       })),
   ];
+
   const handleExport = async () => {
     const exportUrl =
-      "https://script.google.com/macros/s/AKfycbwVmiCzufwMcN5br40vFfDw4vPf3MDlH1H4WP1oncY2oACrSF6HfwYjgO_RfJxhP9BIKw/exec"; // Replace with your Web App URL
+      "https://script.google.com/macros/s/AKfycbxxXOD5B6DNDRQ1uaABOAqc_et_286dw__ZOxXpIfpquN2wbyhaARGmn5BpfYbEDUkx2g/exec"; // Replace with your Web App URL
     try {
       const response = await axios.get(exportUrl);
       const { url } = response.data;
-      window.open(url, "_blank"); // Open the download link in a new tab
+      window.open(url, "_blank");
     } catch (error) {
       console.error("Error exporting file:", error);
     }
   };
+
   return (
     <div className="orders-table">
       <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
@@ -150,24 +151,15 @@ const ServiceTable = () => {
           dataSource={paginatedData}
           rowKey="Service Category Report" // Ensure this key is correct
           pagination={false}
-          scroll={{ x: "max-content" }} // Allows horizontal scrolling if needed
+          scroll={{ x: "max-content" }}
         />
 
-        {width < 768 ? (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        ) : (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={filteredData.length} // Use filteredData for pagination
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

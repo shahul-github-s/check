@@ -15,7 +15,7 @@ import { TOP_SELLING_COLUMN_DEFS } from "@constants/columnDefs";
 const fetchTopSellingData = async () => {
   try {
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbwad1aZtWO7iN4iyR8bTnu9RjZW_j66P1tKuK8wvDs9dcgJLHdAPjFDjvI9CNYrvi9svA/exec"
+      "https://script.google.com/macros/s/AKfycbwLgkAE7ncy8Tb6lk3RtlMyo-G3_AORU8ePAnrUhUwpFFeYVgzJa5oRMbds0MJ_OE1Vzw/exec"
     ); // Replace with your actual Google Apps Script URL
     const data = await response.json();
     return data;

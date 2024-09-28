@@ -62,7 +62,7 @@ const defaultData = {
 const fetchSalesData = async () => {
   try {
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbwEg7PSNzrZmd8AVxl-_pGrijyazyhbDVJ29wEI3IibLcqZg9bySaTuVtUxaghkERtnZw/exec"
+      "https://script.google.com/macros/s/AKfycbyp35HxJbphoMMt1cCjJC1NF0IXi5ybPhpGvGAropukw04vEZiLXjHd475iMeHz3M7CiA/exec"
     );
     const data = await response.json();
 

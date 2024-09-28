@@ -17,8 +17,8 @@ const ServiceTable = () => {
   useEffect(() => {
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbzglLugDnXGI7e1ysuLSvGrtDwiDgw9bGAfKtge3aQZ6RyfqIvhIdnH48plCFRik_TX2A/exec"
-      )
+        "https://script.google.com/macros/s/AKfycbwynjY4-vSK07RGUEQ91sOuIMwBQMbnUCW78lVd3ahqhifZYwiBDiV5GdDt7duGQ8LfCw/exec"
+      ) // Update this with your new web app URL
       .then((response) => {
         setData(response.data);
       })
@@ -93,9 +93,7 @@ const ServiceTable = () => {
     "General Services",
     "E-Sevai",
     "Job Application Support",
-    "Travel Agnecy",
-    "Pan Card",
-    "Money Transfer Services",
+    "Travel Services",
   ];
 
   // Update columns definition
@@ -118,7 +116,7 @@ const ServiceTable = () => {
 
   const handleExport = async () => {
     const exportUrl =
-      "https://script.google.com/macros/s/AKfycbwVmiCzufwMcN5br40vFfDw4vPf3MDlH1H4WP1oncY2oACrSF6HfwYjgO_RfJxhP9BIKw/exec"; // Replace with your Web App URL
+      "https://script.google.com/macros/s/AKfycbxxXOD5B6DNDRQ1uaABOAqc_et_286dw__ZOxXpIfpquN2wbyhaARGmn5BpfYbEDUkx2g/exec"; // Update with your export URL
     try {
       const response = await axios.get(exportUrl);
       const { url } = response.data;
@@ -127,6 +125,7 @@ const ServiceTable = () => {
       console.error("Error exporting file:", error);
     }
   };
+
   return (
     <div className="orders-table">
       <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
@@ -154,21 +153,12 @@ const ServiceTable = () => {
           scroll={{ x: "max-content" }} // Allows horizontal scrolling if needed
         />
 
-        {width < 768 ? (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        ) : (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

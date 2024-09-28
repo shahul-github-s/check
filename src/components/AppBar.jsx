@@ -19,7 +19,7 @@ import loadable from "@loadable/component";
 // assets
 import user from "@assets/user.webp";
 
-const Notifications = loadable(() => import("@components/Notifications"));
+// const Notifications = loadable(() => import("@components/Notifications"));
 const ShoppingCart = loadable(() => import("@components/ShoppingCart"));
 const SearchModal = loadable(() => import("@components/SearchModal"));
 
@@ -39,9 +39,9 @@ const AppBar = ({ title }) => {
     setIsSearchExpanded(false);
   }, [width]);
 
-  const handleInput = () => {
-    setIsSearchExpanded(!isSearchExpanded);
-  };
+  // const handleInput = () => {
+  //   setIsSearchExpanded(!isSearchExpanded);
+  // };
 
   useEffect(() => {
     if (isSearchExpanded) {
@@ -90,7 +90,7 @@ const AppBar = ({ title }) => {
                 />
               </Collapse>
             </div>
-            <Tooltip
+            {/* <Tooltip
               title={<Notifications />}
               placement="bottom-end"
               classes={{
@@ -107,7 +107,7 @@ const AppBar = ({ title }) => {
                 <i className="icon-bell-regular" />
                 <span className="badge bg-red">1</span>
               </button>
-            </Tooltip>
+            </Tooltip> */}
             <button
               className="btn-icon"
               aria-label="Change mode"

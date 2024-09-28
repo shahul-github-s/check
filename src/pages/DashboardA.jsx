@@ -57,11 +57,11 @@ const DashboardA = () => {
           <FailedOrders />
         </div>
         <h2>Performance Review</h2>
-        <OrdersTable />
         <ServiceCatagory />
+        <OrdersTable />
         <h2>Sales Review</h2>
-        <ServiceTable />
         <ServiceCatagorySales />
+        <ServiceTable />
       </div>
     </>
   );

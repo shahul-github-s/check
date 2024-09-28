@@ -63,7 +63,7 @@ const SalesByCategory = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbw4h3m4YxuFvbg0eD9A0oTM1mtvGbVsQdsGw_erIG9ZB66V_wnK9Chmz8eiuaXzTOvJvw/exec"
+        "https://script.google.com/macros/s/AKfycbxuf5JYQsnP0gSd7sA4dFIJmzFmCKCJZ8-WqmE7X3Yg9yeHi_kPcZf5KSXPnsI7JWp-yg/exec"
       );
       const jsonData = await response.json();
 
@@ -109,7 +109,7 @@ const SalesByCategory = () => {
     // Set up polling to fetch data every second
     const interval = setInterval(() => {
       fetchData();
-    }, 1000); // 1000ms = 1 second
+    }, 100); // 1000ms = 1 second
 
     // Clean up the interval on component unmount
     return () => clearInterval(interval);

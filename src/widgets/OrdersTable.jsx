@@ -17,7 +17,7 @@ const OrdersTable = () => {
   useEffect(() => {
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbx300sNNOBDLagVaE0fdF3cl9Aq92AjZZNf1_Tt6N0U9oP_LvaG2Pn4JzKPFEtz5EnCUg/exec"
+        "https://script.google.com/macros/s/AKfycbwimtycCca8PsR_HJgYupB1CdPLbF5_s5LN7K6ZeSBQf6i0ADwKgxmhG9hjkNZAJcZ2Iw/exec"
       )
       .then((response) => {
         setData(response.data);
@@ -29,23 +29,6 @@ const OrdersTable = () => {
   const totalItems = data.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Filter data based on the search query
-  const filteredData = data.filter((item) =>
-    item["Service Unit Report "].toLowerCase().includes(query.toLowerCase())
-  );
-
-  const paginatedData = filteredData.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
-
-  const handlePageChange = (page) => {
-    if (page >= 0 && page < totalPages) {
-      setPagination({ ...pagination, currentPage: page });
-    }
-  };
-
-  // Define fixed values for the first column
   const fixedValues = [
     "Ration Card",
     "Voter Id",
@@ -92,17 +75,36 @@ const OrdersTable = () => {
     "Outline",
   ];
 
-  // Update columns definition
+  const filteredData = data.filter((item) => {
+    const serviceUnit = item["Service Unit Report "]; // Note the extra space in the key
+    return (
+      serviceUnit &&
+      fixedValues.includes(serviceUnit.trim()) &&
+      serviceUnit.toLowerCase().includes(query.toLowerCase())
+    );
+  });
+
+  const paginatedData = filteredData.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 0 && page < totalPages) {
+      setPagination({ ...pagination, currentPage: page });
+    }
+  };
+
   const columns = [
     {
       title: "Service Unit Report",
       dataIndex: "Service Unit Report ",
       key: "Service Unit Report ",
-      fixed: "left", // Fix the first column to the left
-      render: (text) => (fixedValues.includes(text) ? text : ""), // Render fixed values only
+      fixed: "left",
+      render: (text) => (text ? text : null), // Render text if it exists
     },
     ...Object.keys(data[0] || {})
-      .filter((key) => key !== "Service Unit Report ")
+      .filter((key) => key !== "Service Unit Report ") // Exclude the fixed column from this mapping
       .map((key) => ({
         title: key.trim(),
         dataIndex: key.trim(),
@@ -112,7 +114,7 @@ const OrdersTable = () => {
 
   const handleExport = async () => {
     const exportUrl =
-      "https://script.google.com/macros/s/AKfycbwVmiCzufwMcN5br40vFfDw4vPf3MDlH1H4WP1oncY2oACrSF6HfwYjgO_RfJxhP9BIKw/exec"; // Replace with your Web App URL
+      "https://script.google.com/macros/s/AKfycbxxXOD5B6DNDRQ1uaABOAqc_et_286dw__ZOxXpIfpquN2wbyhaARGmn5BpfYbEDUkx2g/exec"; // Replace with your Web App URL
     try {
       const response = await axios.get(exportUrl);
       const { url } = response.data;
@@ -121,6 +123,7 @@ const OrdersTable = () => {
       console.error("Error exporting file:", error);
     }
   };
+
   return (
     <div className="orders-table">
       <div className="flex flex-col flex-1 gap-6 py-4 px-5 xs:px-6">
@@ -143,26 +146,17 @@ const OrdersTable = () => {
         <BasicTable
           columns={columns}
           dataSource={paginatedData}
-          rowKey="Service Unit Report " // Ensure this key is correct
+          rowKey="Service Unit Report " // Ensure this key is correct with the space
           pagination={false}
-          scroll={{ x: "max-content" }} // Allows horizontal scrolling if needed
+          scroll={{ x: "max-content" }}
         />
 
-        {width < 768 ? (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        ) : (
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={filteredData.length} // Use filteredData for pagination
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

@@ -11,33 +11,33 @@ import dayjs from "dayjs";
 export const TOP_SELLING_COLUMN_DEFS = [
   {
     title: "Transaction Bank",
-    dataIndex: "name",
+    dataIndex: "transactionBank", // Updated to match the key in your data
     width: 280,
   },
   {
-    title: "Revenue",
-    dataIndex: "revenue",
-    render: (text) => <span>₹{text}</span>,
-    sorter: (a, b) => a.revenue - b.revenue,
+    title: "Sales", // Changed from "Revenue" to "Sales"
+    dataIndex: "sales", // Updated to match the key in your data
+    render: (text) => <span>₹{text}</span>, // Using Indian Rupee symbol (₹)
+    sorter: (a, b) => a.sales - b.sales, // Sorting based on sales value
   },
   {
     title: "Profit",
-    dataIndex: "profit",
-    render: (text) => <span>₹{text}</span>,
-    sorter: (a, b) => a.profit - b.profit,
+    dataIndex: "profit", // Updated to match the key in your data
+    render: (text) => <span>₹{text}</span>, // Formatting with Indian Rupee symbol (₹)
+    sorter: (a, b) => a.profit - b.profit, // Sorting based on profit value
   },
   {
     title: "Expenses",
-    dataIndex: "expenses",
+    dataIndex: "expenses", // Updated to match the key in your data
     render: (text) => {
       const formattedTotal = text.toLocaleString("en-IN", {
         style: "currency",
         currency: "INR",
         minimumFractionDigits: 2,
       });
-      return <span>{formattedTotal}</span>;
+      return <span>{formattedTotal}</span>; // Formatting as INR currency with comma separator
     },
-    sorter: (a, b) => a.expenses - b.expenses,
+    sorter: (a, b) => a.expenses - b.expenses, // Sorting based on expenses value
   },
 ];
 

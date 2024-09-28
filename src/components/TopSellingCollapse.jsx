@@ -4,13 +4,13 @@ import Collapse from "@mui/material/Collapse";
 import TopSellingProductItem from "@components/TopSellingProductItem";
 
 // constants
-import { PRODUCT_STATUSES } from "@constants/options";
+// import { PRODUCT_STATUSES } from "@constants/options";
 
 // utils
 import PropTypes from "prop-types";
 
 const TopSellingCollapse = ({ product, active, setActive, index }) => {
-  const status = PRODUCT_STATUSES.find((item) => item.value === product.status);
+  // const status = PRODUCT_STATUSES.find((item) => item.value === product.status);
 
   const toggleCollapse = () => {
     setActive(active === product.id ? "" : product.id);

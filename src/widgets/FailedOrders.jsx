@@ -9,30 +9,35 @@ const FailedOrders = () => {
     // Define the function to fetch data
     const fetchData = () => {
       fetch(
-        "https://script.google.com/macros/s/AKfycbzyBeVO_V9BzoZiAYtbxeS_Q5Jazwg2jb_8ApieQXMik4d4Bj5ZLCXzPv4ndJFKSjV5jg/exec"
+        "https://script.google.com/macros/s/AKfycbw2tc7af1ghd5RrVZAknKetGJgqZXItT5CnZZguIzKBSQgTSa-nUyra458Uvs2ksIwo0A/exec"
       )
         .then((response) => response.json())
         .then((sheetData) => {
           setData([
             {
-              icon: "cart-circle-xmark",
-              value: sheetData.order1.value,
-              label: sheetData.order1.label,
+              // icon: "cart-circle-xmark",
+              icon: "arrow-right-arrow-left",
+              value: sheetData.order1.value, // T18
+              label: sheetData.order1.label, // S18
             },
             {
               icon: "arrow-right-arrow-left",
-              value: sheetData.order2.value,
-              label: sheetData.order2.label,
+              value: sheetData.order2.value, // T19
+              label: sheetData.order2.label, // S19
             },
             {
-              icon: "ban",
-              value: sheetData.order3.value,
-              label: sheetData.order3.label,
+              // icon: "ban",
+              icon: "square-list",
+
+              value: sheetData.order3.value, // T20
+              label: sheetData.order3.label, // S20
             },
             {
-              icon: "square-fragile",
-              value: sheetData.order4.value,
-              label: sheetData.order4.label,
+              // icon: "square-fragile",
+              icon: "square-list",
+
+              value: sheetData.order4.value, // T21
+              label: sheetData.order4.label, // S21
             },
           ]);
         })

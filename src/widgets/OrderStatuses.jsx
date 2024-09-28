@@ -34,15 +34,16 @@ const OrderStatuses = () => {
     // Function to fetch data from Google Apps Script
     const fetchData = () => {
       fetch(
-        "https://script.google.com/macros/s/AKfycbwoTdE736qqIXH7aCzNr1eRmqPMmAjDZcH-lgoLhkrDxewLbM3fA8T1XY8lyRQUVGusjw/exec"
+        "https://script.google.com/macros/s/AKfycbz6Ii_J9oaFD7F_nxFaDwxsSdls-7mQwM4ogEHfgSzJAMVffRBvorjwdtFTcOfjFWGErA/exec"
       )
         .then((response) => response.json())
         .then((data) => {
           // Update the state with the fetched data
           setExcess([
             {
-              icon: "square-list",
-              value: data.excess.leadCount,
+              // icon: "square-list",
+              icon: "cart-circle-xmark",
+              value: data.excess.leadCount, // U13
               label: "Lead Count",
             },
           ]);
@@ -50,17 +51,17 @@ const OrderStatuses = () => {
           setData([
             {
               icon: "square-fragile",
-              value: data.data.unsettledAmount,
+              value: data.data.unsettledAmount, // U15
               label: "Unsettled Amount",
             },
             {
               icon: "box-check",
-              value: data.data.inHandCash,
+              value: data.data.inHandCash, // T5
               label: "In Hand Cash",
             },
             {
               icon: "bars-progress",
-              value: data.data.upiTransaction,
+              value: data.data.upiTransaction, // T6
               label: "UPI Transaction",
             },
           ]);
