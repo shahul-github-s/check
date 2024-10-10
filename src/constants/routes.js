@@ -1,4 +1,6 @@
 import Logout from "@components/Logout"; // Adjust the import path accordingly
+import Product from "@pages/Products";
+import PaymentPendingForm from "@widgets/PaymentPendingForm";
 const ROUTES = {
   main: [
     {
@@ -24,40 +26,42 @@ const ROUTES = {
         // },
       ],
     },
+    {
+      name: "Cash Details",
+      icon: "bag-shopping",
+      links: [
+        {
+          path: "/products",
+          name: "In Hand Cash",
+          component: Product,
+        },
+        // {
+        //   path: "/product",
+        //   name: "Product Page",
+        // },
+        // {
+        //   path: "/create-product",
+        //   name: "Create Product",
+        // },
+      ],
+    },
     // {
-    //   name: "Products",
-    //   icon: "bag-shopping",
-    //   links: [
-    //     {
-    //       path: "/products",
-    //       name: "Product List",
-    //     },
-    //     {
-    //       path: "/product",
-    //       name: "Product Page",
-    //     },
-    //     {
-    //       path: "/create-product",
-    //       name: "Create Product",
-    //     },
-    //   ],
-    // },
-    // {
-    //   name: "Orders",
+    //   name: "Disposition Forms",
     //   icon: "square-list",
     //   links: [
     //     {
-    //       path: "/orders",
-    //       name: "Orders Table",
+    //       path: "/PaymentPendingForm",
+    //       name: "Payment Pendings",
+    //       components: PaymentPendingForm,
     //     },
-    //     {
-    //       path: "/order-details",
-    //       name: "Order Details",
-    //     },
-    //     {
-    //       path: "/invoice",
-    //       name: "Invoice",
-    //     },
+    // {
+    //   path: "/order-details",
+    //   name: "Order Details",
+    // },
+    // {
+    //   path: "/invoice",
+    //   name: "Invoice",
+    // },
     //   ],
     // },
     // {
